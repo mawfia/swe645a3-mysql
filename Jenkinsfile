@@ -30,7 +30,7 @@ pipeline {
                 container('helm'){
                     sh "helm upgrade ${JOB_NAME} --install --force --set version=1.0 ./mysql"
                 }
-                echo "MySQL Deployment # ${BUILD_NUMBER} is complete!""
+                echo "MySQL Deployment # ${BUILD_NUMBER} is complete!"
             }
         }
     }
