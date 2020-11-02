@@ -1,0 +1,41 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: mysql-spring
+spec:
+  selector:
+    matchLabels:
+      app: mysql-spring
+      tier: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql-spring
+        tier: mysql
+    spec:
+      containers:
+      - image: mawfia/mysql:{{ .Values.version | default 1.0 }}
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: swe645a3
+        ports:
+        - containerPort: 3306
+          name: mysql
+        lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "mysql --version"]
+        volumeMounts:
+        - name: mysql
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql
+        persistentVolumeClaim:
+          claimName: mysql
