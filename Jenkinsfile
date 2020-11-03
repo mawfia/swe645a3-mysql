@@ -12,15 +12,7 @@ pipeline {
         stage('build') {
             steps {
                   container('docker'){
-                  sh '''
-                      if [ -e *.sql ];
-                      then
-                          env.DATA_COPY="copy"
-                      else
-                          env.DATA_COPY="no_copy"
-                      fi
-                     '''
-                  sh "docker build --build-arg data_copy=${env.DATA_COPY} -t ${registry}:${BUILD_NUMBER} ."
+                  sh "docker build -t ${registry}:${BUILD_NUMBER} ."
                 }
             }
         }
