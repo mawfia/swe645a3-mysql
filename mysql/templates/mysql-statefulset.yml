@@ -31,7 +31,7 @@ spec:
         lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "-c", "rm test"]
+                command: ["/bin/sh", "-c", "mysql -V"]
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
