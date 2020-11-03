@@ -1,5 +1,7 @@
 ARG data_copy=no
 
+ENV data_copy=$data_copy
+
 FROM mysql:latest as build_yes
 ONBUILD COPY *.sql .
 
