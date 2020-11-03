@@ -15,11 +15,12 @@ pipeline {
                   sh '''
                       if [ -e *.sql ];
                       then
-                          docker build --build-arg data_copy=yes -t ${registry}:${BUILD_NUMBER} .
+                          env.DATA_COPY="copy"
                       else
-                          docker build --build-arg data_copy=no -t ${registry}:${BUILD_NUMBER} .
+                          env.DATA_COPY="no_copy"
                       fi
                      '''
+                  sh "docker build --build-arg data_copy=${env.DATA_COPY} -t ${registry}:${BUILD_NUMBER} ."
                 }
             }
         }

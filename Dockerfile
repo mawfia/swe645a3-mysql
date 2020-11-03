@@ -1,4 +1,4 @@
-ARG data_copy=no
+ARG data_copy="no"
 
 ENV data_copy=$data_copy
 
