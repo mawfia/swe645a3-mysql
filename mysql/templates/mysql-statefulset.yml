@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+  labels:
+    app: mysql-spring
+spec:
+  selector:
+    matchLabels:
+      app: mysql-spring
+      tier: mysql
+  serviceName: mysql
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mysql-spring
+        tier: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mawfia/mysql:{{ .Values.version | default 1.0 }}
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: "root"
+        - name: MYSQL_DATABASE
+          value: "swe645a3"
+        ports:
+        - containerPort: 3306
+          name: mysql
+        lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "rm test"]
+        volumeMounts:
+        - name: mysql
+          mountPath: /var/lib/mysql
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql
+      annotations:
+        volume.beta.kubernetes.io/storage-class: mysql
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 10Gi
