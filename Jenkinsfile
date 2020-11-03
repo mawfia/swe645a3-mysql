@@ -13,7 +13,7 @@ pipeline {
             steps {
                   container('docker'){
                   sh '''
-                      if [ -e "*.sql" ]
+                      if [ -e \*\.sql ]
                       then
                           export DATA_COPY=copy
                       else
