@@ -12,7 +12,7 @@ pipeline {
         stage('build') {
             steps {
                   container('docker'){
-                  sh '''#!/bin/bash
+                  sh '''
                       if [ -e *.sql ];
                       then
                           export DATA_COPY=copy
