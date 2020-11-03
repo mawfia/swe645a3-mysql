@@ -20,7 +20,7 @@ pipeline {
             steps {
                 container('docker'){
                     withDockerRegistry([credentialsId: "${registryCredential}", url: ""]) {
-                          sh "docker push ${registry}:${BUILD_NUMBER}"
+                          sh "docker push ${registry}:${BUILD_NUMBER}.0"
                       }
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
         stage('deploy') {
             steps {
                 container('helm'){
-                    sh "helm upgrade ${JOB_NAME} --install --force --set version=1.0 ./mysql"
+                    sh "helm upgrade ${JOB_NAME} --install --force --set version={BUILD_NUMBER} ./mysql"
                 }
                 echo "MySQL Deployment # ${BUILD_NUMBER} is complete!"
             }
