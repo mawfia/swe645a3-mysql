@@ -5,4 +5,4 @@ WORKDIR /docker-entrypoint-initdb.d/
 # needed for intialization
 ENV MYSQL_ROOT_PASSWORD=root
 
-COPY test *.sql .
+COPY test *.sql ./
