@@ -1,10 +1,12 @@
+ARG data_copy
+
 FROM mysql:latest as build_copy
 ONBUILD COPY *.sql .
 
 FROM mysql:latest as build_no_copy
 ONBUILD RUN echo "No data to copy"
 
-FROM build_${DATA_COPY}
+FROM build_${data_copy}
 WORKDIR /docker-entrypoint-initdb.d/
 
 # needed for intialization
