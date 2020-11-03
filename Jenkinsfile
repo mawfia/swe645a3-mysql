@@ -20,7 +20,7 @@ pipeline {
             steps {
                 container('docker'){
                     withDockerRegistry([credentialsId: "${registryCredential}", url: ""]) {
-                          sh "docker push ${registry}:${BUILD_NUMBER}.0"
+                          sh "docker push ${registry}:${BUILD_NUMBER}"
                       }
                 }
             }
