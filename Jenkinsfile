@@ -12,14 +12,13 @@ pipeline {
         stage('build') {
             steps {
                   container('docker'){
-                  sh '''
-                      if \[ -e *.sql \]
+                  sh '''#!/bin/bash
+                      if [ -e *.sql ];
                       then
                           export DATA_COPY=copy
                       else
                           export DATA_COPY=no_copy
                       fi
-                ENDSSH'
                      '''
                   sh 'docker build -t ${registry}:${BUILD_NUMBER} .'
                 }
