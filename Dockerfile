@@ -1,4 +1,4 @@
-ARG data_copy
+ARG data_copy=no_copy
 
 FROM mysql:latest as build_copy
 ONBUILD COPY *.sql .

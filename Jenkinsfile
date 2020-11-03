@@ -20,7 +20,7 @@ pipeline {
                           export DATA_COPY=no_copy
                       fi
                      '''
-                  sh 'docker build --build-arg data_copy=${DATA_COPY} -t ${registry}:${BUILD_NUMBER} .'
+                  sh "docker build --build-arg data_copy=${DATA_COPY} -t ${registry}:${BUILD_NUMBER} ."
                 }
             }
         }
