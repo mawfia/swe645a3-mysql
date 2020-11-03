@@ -28,7 +28,7 @@ pipeline {
         stage('deploy') {
             steps {
                 container('helm'){
-                    sh "helm upgrade ${JOB_NAME} --install --force --set version={BUILD_NUMBER} ./mysql"
+                    sh "helm upgrade ${JOB_NAME} --install --force --set version=${BUILD_NUMBER} ./mysql"
                 }
                 echo "MySQL Deployment # ${BUILD_NUMBER} is complete!"
             }
