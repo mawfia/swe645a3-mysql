@@ -108,6 +108,10 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
+        lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "rm test"]
         volumeMounts:
         - name: mysql
           mountPath: /var/lib/mysql
